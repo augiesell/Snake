@@ -123,6 +123,7 @@ SNAKE.Snake = SNAKE.Snake || (function() {
             yPosShift = [],
             snakeSpeed = 150,
             isDead = false;
+            goCount = 0;
 
         // ----- public variables -----
 
@@ -228,11 +229,24 @@ SNAKE.Snake = SNAKE.Snake || (function() {
             }
         };
 
+        me.runPattern = function() {
+            me.simulateKeyPress('Right');
+        };
+
+        me.simulateKeyPress = function(key) {
+            console.log("Simulating key press...")       
+             // 0: up, 1: left, 2: down, 3: right
+            currentDirection = 1;
+        };
+
         /**
         * This method is executed for each move of the snake. It determines where the snake will go and what will happen to it. This method needs to run quickly.
         * @method go
         */
         me.go = function() {
+            goCount++;
+            console.log(goCount);
+            me.runPattern();
             var ptime = (new Date()).getTime();
             var oldHead = me.snakeHead,
                 newHead = me.snakeTail;
@@ -685,6 +699,7 @@ SNAKE.Board = SNAKE.Board || (function() {
             tmpElm.appendChild(tryAgainStart);
             return tmpElm;
         }
+
 
         // ---------------------------------------------------------------------
         // public functions
